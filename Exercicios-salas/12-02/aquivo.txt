@@ -1,0 +1,139 @@
+Aula05_10_Fev_2025
+
+Objetivos desta aula:
+
+1. Revisar objetos no javascript
+
+Observe o exemplo a seguir:
+
+const produtos = {
+    produto1: {
+        nome: "Camiseta Algodão Premium",
+        preco: 59.90,
+        disponivel: true,
+    },
+    produto2: {
+        nome: "Calça Jeans Slim Fit",
+        preco: 129.90,
+        disponivel: false,
+    },
+    produto3: {
+        nome: "Tênis Esportivo Runner",
+        preco: 199.90,
+        disponivel: true,
+    },
+};
+
+Essa estrutura produtos é um objeto JavaScript que serve como um catálogo de produtos onde: 
+
+const produtos = { ... }; 
+  _const declara uma constante, o que significa que a variável produtos não pode ser reatribuída a outro objeto depois de sua inicialização. 
+  _No entanto, o conteúdo do objeto (as propriedades e seus valores) pode ser alterado. Isso é importante! Ela é atribuída a um objeto, definido por chaves {}.
+
+produto1, produto2, produto3: 
+  _Essas são as CHAVES do objeto principal produtos. 
+  _Cada CHAVE atua como um identificador único para um produto específico. 
+
+{ nome: "Camiseta Algodão Premium", 
+  preco: 59.90, 
+  disponivel: true 
+} 
+(e similares): 
+  _Este é o valor associado a cada chave (produto). 
+  _Cada valor é, por si só, outro objeto JavaScript. 
+  _Estes objetos internos contêm informações detalhadas sobre cada produto:
+
+nome      : O nome descritivo do produto (string)
+preco     : O preço do produto (number). 
+disponivel: Um valor booleano (true ou false) indicando se o produto está em estoque e disponível para venda.
+
+************
+Observação.:
+************
+Esta estrutura é facilmente serializável para JSON, o que a torna ideal para transferir dados entre um servidor e um cliente em aplicações web. 
+Você pode usar:
+
+********
+EXEMPLO:
+********  
+   ********************************************************************
+   JSON.stringify(produtos) para converter o objeto em uma string JSON:
+   ********************************************************************
+
+1. // Usando JSON.stringify() para converter o objeto em uma string JSON
+2. const produtosJSON = JSON.stringify(produtos);
+3. console.log(produtosJSON);
+4. //fim da conversão
+
+***********
+Explicando:
+***********
+linha 2: const produtosJSON = JSON.stringify(produtos);
+Vamos dividir a explicação desta linha em duas partes:
+
+1ª parte: 
+const produtosJSON: 
+A string JSON resultante é armazenada na variável produtosJSON. 
+Essa string agora pode ser armazenada em um arquivo, enviada pela rede (por exemplo, para um servidor web), ou usada de outras formas.
+
+2ª parte 
+= JSON.stringify(produtos):
+Essa é a função chave - stringify() 
+Ela pega o objeto JavaScript produtos e o transforma em uma string JSON.
+
+   ********************************************************************
+  _JSON.parse(stringJSON) para converter a string JSON de volta em um objeto.
+   ********************************************************************
+
+1. // Usando JSON.parse() para converter a string JSON de volta em um objeto JavaScript
+2. const produtosObjeto = JSON.parse(produtosJSON);
+3. console.log(produtosObjeto);
+4. console.log(typeof produtosObjeto);
+
+***********
+Explicando:
+***********
+linha 2: 
+const produtosObjeto = JSON.parse(produtosJSON);
+
+Vamos dividir a explicação desta linha em duas partes:
+
+1ª parte:
+const produtosObjeto:
+O objeto JavaScript resultante é armazenado na variável produtosObjeto. Agora você pode acessar os dados do produto como faria com qualquer outro objeto JavaScript.
+
+2ª parte 
+= JSON.parse(produtosJSON);
+Essa função pega a string JSON produtosJSON e a transforma de volta em um objeto JavaScript.
+
+linha 4: typeof produtosObjeto: 
+Confirma que produtosObjeto é um objeto.
+
+********************
+Caso de uso prático:
+********************
+Armazenamento no LocalStorage do navegador:
+
+// Serializar para JSON e armazenar:
+localStorage.setItem('produtos', JSON.stringify(produtos));
+
+// Recuperar do LocalStorage e desserializar:
+const produtosSalvos = localStorage.getItem('produtos');
+if (produtosSalvos) {
+    const produtosRecuperados = JSON.parse(produtosSalvos);
+    console.log(produtosRecuperados.produto1.nome);
+}
+
+********************
+***** ** *** *******
+Casos de Uso Comuns:
+***** ** *** *******
+********************
+
+  _E-commerce: Representar um catálogo de produtos com informações como nome, preço, descrição, disponibilidade, etc.
+
+  _Sistemas de Inventário: Gerenciar o estoque de produtos e suas características.
+
+  _APIs: Retornar dados de produtos em formato JSON.
+
+  _Configurações: Armazenar configurações de um aplicativo, onde cada chave representa uma configuração e o valor representa seu valor.
